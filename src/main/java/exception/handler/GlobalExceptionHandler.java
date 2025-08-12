@@ -1,10 +1,7 @@
 package exception.handler;
 
 import exception.ErrorDetails;
-import exception.personalException.InvalidAlumniTypeException;
-import exception.personalException.InvalidDegreeException;
-import exception.personalException.InvalidRGPDStatusException;
-import exception.personalException.InvalidStudyYearException;
+import exception.personalException.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -48,6 +45,16 @@ public class GlobalExceptionHandler {
         ErrorDetails error = new ErrorDetails(
                 HttpStatus.BAD_REQUEST.value(),
                 "Invalid Alumni Type",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(InvalidServiceAwarenessException.class)
+    public ResponseEntity<ErrorDetails> handleInvalidServiceAwareness(InvalidServiceAwarenessException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Service Awareness",
                 ex.getMessage()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
