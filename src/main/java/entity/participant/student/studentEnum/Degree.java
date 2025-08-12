@@ -1,4 +1,4 @@
-package entity.student.studentEnum;
+package entity.participant.student.studentEnum;
 
 import exception.personalException.InvalidDegreeException;
 import lombok.AllArgsConstructor;

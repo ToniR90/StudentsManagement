@@ -1,4 +1,4 @@
-package entity.participant.participantEnum;
+package entity.participant.abstractParticipant.participantEnum;
 
 import exception.personalException.InvalidRGPDStatusException;
 import lombok.AllArgsConstructor;

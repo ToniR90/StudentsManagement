@@ -1,6 +1,6 @@
-package entity.externalCollaborator;
+package entity.participant.externalCollaborator;
 
-import entity.participant.Participant;
+import entity.participant.abstractParticipant.Participant;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

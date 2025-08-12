@@ -1,12 +1,15 @@
-package entity.student;
+package entity.participant.student;
 
-import entity.participant.Participant;
+import entity.participant.abstractParticipant.Participant;
+import entity.participant.student.studentEnum.AlumniType;
+import entity.participant.student.studentEnum.Degree;
+import entity.participant.student.studentEnum.ServiceAwareness;
+import entity.participant.student.studentEnum.StudyYear;
 import entity.student.studentEnum.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;

@@ -1,7 +1,6 @@
 package dto.student;
 
-import entity.student.studentEnum.ServiceAwareness;
-import exception.personalException.InvalidServiceAwarenessException;
+import entity.participant.student.studentEnum.ServiceAwareness;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
