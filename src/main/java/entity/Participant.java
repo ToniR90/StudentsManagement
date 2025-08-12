@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -33,11 +34,11 @@ public abstract class Participant {
     @Size(min = 2 , max = 20 , message = "Surname must be between 2 - 20 chars long")
     private String surname;
 
-    @Column(name = "second_surname")
+    @Column(name = "secondSurname")
     private String secondSurname;
 
     @NotBlank
-    @Column(name = "email" , nullable = false)
+    @Column(name = "email" , nullable = false , unique = true)
     @Email(message = "Invalid format email")
     private String email;
 
@@ -47,7 +48,13 @@ public abstract class Participant {
             joinColumns = @JoinColumn(name = "participant_id")
     )
     @Column(name = "extra_email")
-    private List<@Email(message = "Invalid email format") String> emailList;
+    private Set<@Email(message = "Invalid email format") String> extraEmails;
 
+    @ManyToMany
+    @JoinTable(
+            name = "participant_sessions" ,
+            joinColumns = @JoinColumn(name = "participant_id") ,
+            inverseJoinColumns = @JoinColumn(name = "session_id")
+    )
     private List<Session> sessionList;
 }
