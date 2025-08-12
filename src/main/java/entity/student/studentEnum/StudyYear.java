@@ -1,5 +1,27 @@
 package entity.student.studentEnum;
 
+import exception.personalException.InvalidStudyYearException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.Arrays;
+
+@Getter
+@AllArgsConstructor
 public enum StudyYear {
-    FIRST , SECOND, THIRD , FOURTH , FIFTH
+    FIRST("First year") ,
+    SECOND("Second year") ,
+    THIRD("Third year") ,
+    FOURTH("Fourth year") ,
+    FIFTH("Fifth year") ,
+    SIXTH("Sixth year");
+
+    private final String label;
+
+    public static StudyYear fromLabel(String label) {
+        return Arrays.stream(values())
+                .filter(y -> y.label.equalsIgnoreCase(label.trim()))
+                .findFirst()
+                .orElseThrow(() -> new InvalidStudyYearException(label));
+    }
 }
