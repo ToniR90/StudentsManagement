@@ -34,8 +34,7 @@ public class Student extends Participant {
     private String personalObservation;
 
     @Column(name = "rgpd_status")
-    private RGPD_Status rgpd_status;
+    private RGPD_Status rgpdStatus;
 
 
-    private List<Session> sessionList;
 }

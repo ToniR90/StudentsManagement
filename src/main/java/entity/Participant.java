@@ -34,7 +34,7 @@ public abstract class Participant {
     private String surname;
 
     @Column(name = "second_surname")
-    private String second_surname;
+    private String secondSurname;
 
     @NotBlank
     @Column(name = "email" , nullable = false)
@@ -48,4 +48,6 @@ public abstract class Participant {
     )
     @Column(name = "extra_email")
     private List<@Email(message = "Invalid email format") String> emailList;
+
+    private List<Session> sessionList;
 }
