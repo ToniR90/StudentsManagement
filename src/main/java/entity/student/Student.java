@@ -1,29 +1,34 @@
 package entity.student;
 
-import entity.Participant;
-import entity.Session;
+import entity.participant.Participant;
 import entity.student.studentEnum.*;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
-import java.util.List;
 
+@Entity
+@Table(name = "students")
 @SuperBuilder
 public class Student extends Participant {
 
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "degree" , nullable = false)
     private Degree degree;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "study_year")
     private StudyYear studyYear;
 
     @Column(name = "is_alumni" , nullable = false)
     private boolean isAlumni;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "alumni_type")
     private AlumniType alumniType;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "service_awareness" , nullable = false)
     private ServiceAwareness serviceAwareness;
 
@@ -32,9 +37,5 @@ public class Student extends Participant {
 
     @Column(name = "personal_observations")
     private String personalObservation;
-
-    @Column(name = "rgpd_status")
-    private RGPD_Status rgpdStatus;
-
 
 }

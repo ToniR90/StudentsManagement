@@ -1,8 +1,11 @@
-package entity;
+package entity.participant;
 
+import entity.Session;
+import entity.participant.participantEnum.RGPD_Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,12 +45,18 @@ public abstract class Participant {
     @Email(message = "Invalid format email")
     private String email;
 
+    @NotNull(message = "RGPD status is required")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rgpd_status" , nullable = false)
+    private RGPD_Status rgpdStatus;
+
     @ElementCollection
     @CollectionTable(
             name = "participant_emails" ,
             joinColumns = @JoinColumn(name = "participant_id")
     )
     @Column(name = "extra_email")
+    @Size(max = 3 , message = "Maximum 3 extra emails allowed")
     private Set<@Email(message = "Invalid email format") String> extraEmails;
 
     @ManyToMany
