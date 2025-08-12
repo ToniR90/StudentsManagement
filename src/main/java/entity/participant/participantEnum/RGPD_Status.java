@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum RGPD_Status {
     SIGNET("Signet") ,
+    SIGNET_ONLINE("Signet online") ,
     NOT_SIGNET("Not signet") ,
     PENDING("Pending");
 
