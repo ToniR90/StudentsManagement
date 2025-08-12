@@ -1,6 +1,6 @@
 package entity.participant;
 
-import entity.Session;
+import entity.session.Session;
 import entity.participant.participantEnum.RGPD_Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
