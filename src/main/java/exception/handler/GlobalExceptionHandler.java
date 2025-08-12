@@ -59,4 +59,14 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
+
+    @ExceptionHandler(InvalidSessionTypeException.class)
+    public ResponseEntity<ErrorDetails> handleInvalidSessionType(InvalidSessionTypeException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Session Type",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }

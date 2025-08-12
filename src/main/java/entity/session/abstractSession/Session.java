@@ -1,4 +1,41 @@
 package entity.session.abstractSession;
 
+import entity.session.abstractSession.sessionEnum.SessionType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
+@Data
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@MappedSuperclass
 public abstract class Session {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    @Column(name = "date" , nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+
+    @NotNull
+    @Column(name = "session_type" , nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SessionType sessionType;
+
+    @NotBlank(message = "Summary cannot be empty")
+    @Column(name = "summary")
+    @Size(max = 2000)
+    private String summary;
 }
