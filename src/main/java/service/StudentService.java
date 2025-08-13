@@ -20,7 +20,7 @@ public class StudentService {
 
     public Student getStudentById(Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException(id));
+                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
     }
 
     public Student saveStudent(Student student) {
@@ -28,10 +28,18 @@ public class StudentService {
     }
 
     public void deleteStudent(Long id) {
+        if(!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException("Student not found");
+        }
         studentRepository.deleteById(id);
     }
 
     public Student findByNameAndSurname(String name , String surname) {
-        return studentRepository.findByNameAndSurname(name , surname);
+        Student student = studentRepository.findByNameIgnoreCaseAndSurnameIgnoreCase(name , surname);
+        if(student == null) {
+            throw new StudentNotFoundException("Student " + name + " " + surname + " not found");
+        }
+        return student;
     }
 }
+/*cerca per: grau, curs, alumni, */

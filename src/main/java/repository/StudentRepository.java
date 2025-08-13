@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepository extends JpaRepository<Student , Long> {
 
-    Student findByNameAndSurname(String name , String surname);
+    Student findByNameIgnoreCaseAndSurnameIgnoreCase(String name , String surname);
 }
