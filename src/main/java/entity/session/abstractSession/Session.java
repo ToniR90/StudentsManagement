@@ -2,6 +2,7 @@ package entity.session.abstractSession;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ public abstract class Session {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull(message = "Date is required")
     @Column(name = "date" , nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
