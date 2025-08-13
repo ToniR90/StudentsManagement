@@ -30,4 +30,8 @@ public class StudentService {
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
+
+    public Student findByNameAndSurname(String name , String surname) {
+        return studentRepository.findByNameAndSurname(name , surname);
+    }
 }
