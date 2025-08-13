@@ -69,4 +69,14 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
+
+    @ExceptionHandler(InvalidSessionAssistanceException.class)
+    public ResponseEntity<ErrorDetails> handleInvalidSessionAssistance(InvalidSessionAssistanceException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Session Assistance",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }
