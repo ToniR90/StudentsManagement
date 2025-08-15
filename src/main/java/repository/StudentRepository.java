@@ -15,3 +15,5 @@ public interface StudentRepository extends JpaRepository<Student , Long> {
     List<Student> findAllByStudyYear(StudyYear studyYear);
     List<Student> findAllByIsAlumniTrue();
 }
+
+//Falta cerca dinàmica
