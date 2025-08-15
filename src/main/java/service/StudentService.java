@@ -52,14 +52,20 @@ public class StudentService {
         return studentRepository.findAllByIsAlumniTrue();
     }
 
-    public Student findByName(String name) {
-        return studentRepository.findByNameIgnoreCase(name)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    public List<Student> findByName(String name) {
+        List<Student> students = studentRepository.findByNameIgnoreCase(name);
+        if(students.isEmpty()) {
+            throw new StudentNotFoundException("No students found with name " + name);
+        }
+        return students;
     }
 
-    public Student findBySurname(String surname) {
-        return studentRepository.findBySurnameIgnoreCase(surname)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    public List<Student> findBySurname(String surname) {
+        List<Student> students = studentRepository.findBySurnameIgnoreCase(surname);
+        if (students.isEmpty()) {
+            throw new StudentNotFoundException("No students found with surname " + surname);
+        }
+        return students;
     }
 
     public Student findByEmail(String email) {
