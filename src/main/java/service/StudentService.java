@@ -1,6 +1,8 @@
 package service;
 
 import entity.participant.student.Student;
+import entity.participant.student.studentEnum.Degree;
+import entity.participant.student.studentEnum.StudyYear;
 import exception.personalException.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,20 @@ public class StudentService {
         }
         return student;
     }
+
+    public List<Student> getAllByDegree(String degreeCode) {
+        Degree degree = Degree.fromCode(degreeCode);
+
+        return studentRepository.getAllByDegreeIgnoreCase(degree);
+    }
+
+    public List<Student> getAllByStudyYear(String studyYear) {
+        StudyYear validYear = StudyYear.fromLabel(studyYear);
+
+        return studentRepository.getAllByStudyYearIgnoreCase(validYear);
+    }
+
+    public List<Student> getAllAlumni() {
+        return studentRepository.getAllAlumni();
+    }
 }
-/*cerca per: grau, curs, alumni, */
