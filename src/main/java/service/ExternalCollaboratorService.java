@@ -23,4 +23,14 @@ public class ExternalCollaboratorService {
                 .orElseThrow(() -> new ExternalCollaboratorNotFoundException("External Collaborator not found"));
     }
 
+    public ExternalCollaborator saveExternalCollaborator(ExternalCollaborator externalCollaborator) {
+        return externalCollaboratorRepository.save(externalCollaborator);
+    }
+
+    public void deleteExternalCollaborator(Long id) {
+        if(!externalCollaboratorRepository.existsById(id)) {
+            throw new ExternalCollaboratorNotFoundException("External Collaborator not found");
+        }
+        externalCollaboratorRepository.deleteById(id);
+    }
 }

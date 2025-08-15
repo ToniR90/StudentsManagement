@@ -14,6 +14,7 @@ public interface StudentRepository extends JpaRepository<Student , Long> {
     List<Student> findAllByDegree(Degree degree);
     List<Student> findAllByStudyYear(StudyYear studyYear);
     List<Student> findAllByIsAlumniTrue();
+    Optional<Student> findByEmailIgnoreCase(String email);
 }
 
 //Falta cerca dinàmica

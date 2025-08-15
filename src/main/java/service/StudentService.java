@@ -50,15 +50,19 @@ public class StudentService {
         return studentRepository.findAllByDegree(degree);
     }
 
-    public List<Student> getAllByStudyYear(String studyYear) {
+    public List<Student> findAllByStudyYear(String studyYear) {
         StudyYear validYear = StudyYear.fromLabel(studyYear);
 
         return studentRepository.findAllByStudyYear(validYear);
     }
 
-    public List<Student> getAllAlumni() {
+    public List<Student> findAllAlumni() {
         return studentRepository.findAllByIsAlumniTrue();
     }
 
-
+    public Student findStudentByEmail(String email) {
+        return studentRepository
+                .findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    }
 }
