@@ -5,7 +5,6 @@ import entity.participant.student.studentEnum.AlumniType;
 import entity.participant.student.studentEnum.Degree;
 import entity.participant.student.studentEnum.ServiceAwareness;
 import entity.participant.student.studentEnum.StudyYear;
-import entity.student.studentEnum.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

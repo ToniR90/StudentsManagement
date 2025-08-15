@@ -59,4 +59,6 @@ public class StudentService {
     public List<Student> getAllAlumni() {
         return studentRepository.findAllByIsAlumniTrue();
     }
+
+
 }
