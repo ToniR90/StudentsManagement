@@ -36,14 +36,6 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public Student findByNameAndSurname(String name , String surname) {
-        return studentRepository
-                .findByNameIgnoreCaseAndSurnameIgnoreCase(name , surname)
-                .orElseThrow(() -> new StudentNotFoundException(
-                        String.format("Student '%s %s' not found" , name , surname)
-                ));
-    }
-
     public List<Student> getAllByDegree(String degreeCode) {
         Degree degree = Degree.fromCode(degreeCode);
 
@@ -60,9 +52,18 @@ public class StudentService {
         return studentRepository.findAllByIsAlumniTrue();
     }
 
-    public Student findStudentByEmail(String email) {
-        return studentRepository
-                .findByEmailIgnoreCase(email)
+    public Student findByName(String name) {
+        return studentRepository.findByNameIgnoreCase(name)
+                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    }
+
+    public Student findBySurname(String surname) {
+        return studentRepository.findBySurnameIgnoreCase(surname)
+                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
+    }
+
+    public Student findByEmail(String email) {
+        return studentRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new StudentNotFoundException("Student not found"));
     }
 }

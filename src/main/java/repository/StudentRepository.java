@@ -10,11 +10,10 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student , Long> {
 
-    Optional<Student> findByNameIgnoreCaseAndSurnameIgnoreCase(String name, String surname);
+    Optional <Student> findByNameIgnoreCase(String name);
+    Optional<Student> findBySurnameIgnoreCase(String surname);
+    Optional <Student> findByEmailIgnoreCase(String email);
     List<Student> findAllByDegree(Degree degree);
     List<Student> findAllByStudyYear(StudyYear studyYear);
     List<Student> findAllByIsAlumniTrue();
-    Optional<Student> findByEmailIgnoreCase(String email);
 }
-
-//Falta cerca dinàmica
