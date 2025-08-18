@@ -6,7 +6,6 @@ import entity.participant.student.studentEnum.Degree;
 import entity.participant.student.studentEnum.ServiceAwareness;
 import entity.participant.student.studentEnum.StudyYear;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -22,17 +21,17 @@ import java.time.LocalDate;
 @Setter
 public class Student extends Participant {
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "degree")
     private Degree degree;
 
-    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "study_year")
     private StudyYear studyYear;
 
-    @NotBlank
+    @NotNull
     @Column(name = "is_alumni" , nullable = false)
     private boolean isAlumni;
 
