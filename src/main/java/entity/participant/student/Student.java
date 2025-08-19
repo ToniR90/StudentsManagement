@@ -8,7 +8,9 @@ import entity.participant.student.studentEnum.StudyYear;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -19,6 +21,8 @@ import java.time.LocalDate;
 @SuperBuilder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student extends Participant {
 
     @NotNull

@@ -52,6 +52,9 @@ public class StudentController {
     @GetMapping("/by-email")
     public ResponseEntity<StudentResponseDTO> getByEmail(@RequestParam String email) {
         Student student = studentService.findByEmail(email);
+        if(student == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(StudentMapper.toResponse(student));
     }
 

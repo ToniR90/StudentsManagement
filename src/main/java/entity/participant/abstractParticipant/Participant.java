@@ -21,7 +21,9 @@ import java.util.Set;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "participants")
 public abstract class Participant {
 
     @Id
@@ -38,7 +40,7 @@ public abstract class Participant {
     @Size(min = 2 , max = 20 , message = "Surname must be between 2 - 20 chars long")
     private String surname;
 
-    @Column(name = "secondSurname")
+    @Column(name = "second_surname")
     private String secondSurname;
 
     @NotBlank
