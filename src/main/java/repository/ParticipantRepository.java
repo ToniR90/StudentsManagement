@@ -15,5 +15,5 @@ public interface ParticipantRepository extends Repository<Participant , Long> {
     List<Participant> findBySurnameIgnoreCase(String surname);
     Optional<Participant> findByEmailIgnoreCase(String email);
     List<Participant> findAllByRGPDStatus(RGPD_Status rgpdStatus);
-    List<Participant> findAllBySession(Session session);
+    List<Participant> findAllBySessionIgnoreCase(String session);
 }
