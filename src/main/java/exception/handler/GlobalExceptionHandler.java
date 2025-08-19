@@ -89,4 +89,14 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(ParticipantNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleParticipantNotFound(ParticipantNotFoundException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.NOT_FOUND.value(),
+                "Participant not found",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 }

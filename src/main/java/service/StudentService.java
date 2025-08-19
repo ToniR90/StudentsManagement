@@ -20,11 +20,6 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Student findStudentById(Long id) {
-        return studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
-    }
-
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
     }
@@ -50,26 +45,5 @@ public class StudentService {
 
     public List<Student> findAllAlumni() {
         return studentRepository.findAllByIsAlumniTrue();
-    }
-
-    public List<Student> findByName(String name) {
-        List<Student> students = studentRepository.findByNameIgnoreCase(name);
-        if(students.isEmpty()) {
-            throw new StudentNotFoundException("No students found with name " + name);
-        }
-        return students;
-    }
-
-    public List<Student> findBySurname(String surname) {
-        List<Student> students = studentRepository.findBySurnameIgnoreCase(surname);
-        if (students.isEmpty()) {
-            throw new StudentNotFoundException("No students found with surname " + surname);
-        }
-        return students;
-    }
-
-    public Student findByEmail(String email) {
-        return studentRepository.findByEmailIgnoreCase(email)
-                .orElseThrow(() -> new StudentNotFoundException("Student not found"));
     }
 }
