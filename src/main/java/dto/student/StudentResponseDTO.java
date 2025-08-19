@@ -1,5 +1,6 @@
 package dto.student;
 
+import dto.participant.ParticipantResponseDTO;
 import entity.participant.abstractParticipant.participantEnum.RGPD_Status;
 import entity.participant.student.studentEnum.AlumniType;
 import entity.participant.student.studentEnum.Degree;
@@ -8,21 +9,15 @@ import entity.participant.student.studentEnum.StudyYear;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
 @Setter
-@Builder
-public class StudentResponseDTO {
-    private Long id;
-    private String name;
-    private String surname;
-    private String secondSurname;
-    private String email;
-    private RGPD_Status rgpdStatus;
-    private Set<String> extraEmails;
+@SuperBuilder
+public class StudentResponseDTO extends ParticipantResponseDTO {
     private Degree degree;
     private StudyYear studyYear;
     private Boolean isAlumni;
