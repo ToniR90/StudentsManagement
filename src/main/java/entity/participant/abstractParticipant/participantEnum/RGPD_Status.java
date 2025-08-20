@@ -15,6 +15,7 @@ public enum RGPD_Status {
     private final String label;
 
     public static RGPD_Status fromLabel(String label) {
+        if(label == null) throw new InvalidRGPDStatusException("null");
         for (RGPD_Status status : values()) {
             if( status.label.equalsIgnoreCase(label)) {
                 return status;

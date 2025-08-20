@@ -20,6 +20,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(InvalidParticipantTypeException.class)
+    public ResponseEntity<ErrorDetails> handleInvalidParticipantType(InvalidParticipantTypeException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.BAD_REQUEST.value(),
+                "Invalid Participant Type",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(InvalidDegreeException.class)
     public ResponseEntity<ErrorDetails> handleInvalidDegreeException(InvalidDegreeException ex) {
         ErrorDetails error = new ErrorDetails(
