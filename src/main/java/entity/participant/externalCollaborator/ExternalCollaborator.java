@@ -13,7 +13,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "external_collaborator")
+@Table(name = "external_collaborators")
 @SuperBuilder
 @Getter
 @Setter
