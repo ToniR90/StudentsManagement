@@ -19,6 +19,9 @@ public enum StudyYear {
     private final String label;
 
     public static StudyYear fromLabel(String label) {
+        if(label == null || label.trim().isEmpty()) {
+            throw new InvalidStudyYearException("null or empty");
+        }
         return Arrays.stream(values())
                 .filter(y -> y.label.equalsIgnoreCase(label.trim()))
                 .findFirst()
