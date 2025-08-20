@@ -26,5 +26,4 @@ public class ServiceAwarenessSelection {
         }
         return serviceAwareness.getLabel();
     }
-
 }
