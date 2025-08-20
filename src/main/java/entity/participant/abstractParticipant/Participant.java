@@ -3,7 +3,6 @@ package entity.participant.abstractParticipant;
 import entity.session.abstractSession.Session;
 import entity.participant.abstractParticipant.participantEnum.RGPD_Status;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

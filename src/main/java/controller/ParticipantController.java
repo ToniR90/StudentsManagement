@@ -2,6 +2,7 @@ package controller;
 
 import dto.participant.ParticipantResponseDTO;
 import entity.participant.abstractParticipant.Participant;
+import entity.session.abstractSession.Session;
 import lombok.RequiredArgsConstructor;
 import mapper.ParticipantMapper;
 import org.springframework.http.ResponseEntity;
@@ -67,13 +68,12 @@ public class ParticipantController {
     }
 
     @GetMapping("/by-session")
-    public ResponseEntity<List<ParticipantResponseDTO>> getBySession(@RequestParam String session) {
-        List<Participant> participants = participantService.findAllBySessionIgnoreCase(session);
+    public ResponseEntity<List<ParticipantResponseDTO>> getBySession(@RequestParam Long sessionId) {
+        List<Participant> participants = participantService.findAllBySession(sessionId);
         List<ParticipantResponseDTO> responseList = participants
                 .stream()
                 .map(ParticipantMapper::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseList);
     }
-
 }

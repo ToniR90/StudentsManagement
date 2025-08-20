@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "sessions")
-public abstract class Session {
+public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
