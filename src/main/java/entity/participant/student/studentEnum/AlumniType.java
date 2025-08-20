@@ -14,7 +14,10 @@ public enum AlumniType {
 
     private final String label;
 
-    public final AlumniType fromLabel(String label) {
+    public static AlumniType fromLabel(String label) {
+        if(label == null || label.trim().isEmpty()) {
+            throw new InvalidAlumniTypeException("null or empty");
+        }
         for(AlumniType status : values()) {
             if(status.label.equalsIgnoreCase(label)) {
                 return status;
