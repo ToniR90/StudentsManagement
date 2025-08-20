@@ -36,8 +36,8 @@ public class Student extends Participant {
     private StudyYear studyYear;
 
     @NotNull
-    @Column(name = "is_alumni" , nullable = false)
-    private boolean isAlumni;
+    @Column(name = "alumni" , nullable = false)
+    private boolean alumni;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "alumni_type")

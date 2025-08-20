@@ -34,6 +34,9 @@ public enum Degree {
     private final String label;
 
     public static Degree fromCode(String code) {
+        if(code == null || code.trim().isEmpty()) {
+            throw new InvalidDegreeException("null or empty");
+        }
         return Arrays.stream(values())
                 .filter(d -> d.code.equalsIgnoreCase(code.trim()))
                 .findFirst()
