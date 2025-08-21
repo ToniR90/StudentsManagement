@@ -10,6 +10,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(GroupSessionNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleGroupSessionNotFound(GroupSessionNotFoundException ex) {
+        ErrorDetails error = new ErrorDetails(
+                HttpStatus.NOT_FOUND.value(),
+                "Group session not found",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
     @ExceptionHandler(IndividualSessionNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleIndividualSessionNotFound(IndividualSessionNotFoundException ex) {
         ErrorDetails error = new ErrorDetails(
