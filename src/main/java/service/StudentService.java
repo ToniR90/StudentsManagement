@@ -17,7 +17,9 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public List<Student> findAllStudents() {
-        return studentRepository.findAll();
+        List<Student> students = studentRepository.findAll();
+        validateNotEmpty(students , "There are no students");
+        return students;
     }
 
     public Student saveStudent(Student student) {
@@ -26,19 +28,29 @@ public class StudentService {
 
     public List<Student> findAllByDegree(String degreeCode) {
         Degree degree = Degree.fromCode(degreeCode);
-        return studentRepository.findAllByDegree(degree);
+        List<Student> students = studentRepository.findAllByDegree(degree);
+        validateNotEmpty(students , "There are no students for the degree " + degreeCode);
+        return students;
     }
 
     public List<Student> findAllByStudyYear(String studyYear) {
         StudyYear validYear = StudyYear.fromLabel(studyYear);
-        return studentRepository.findAllByStudyYear(validYear);
+        List<Student> students = studentRepository.findAllByStudyYear(validYear);
+        validateNotEmpty(students , "There are no students for the year " + studyYear);
+        return students;
     }
 
     public List<Student> findAllAlumni() {
-        return studentRepository.findAllByIsAlumniTrue();
+        List<Student> students = studentRepository.findAllByIsAlumniTrue();
+        validateNotEmpty(students , "There are no alumni students");
+        return students;
     }
 
-    private void validateNoEmpty(List<?> list , String message) {
+    public long countAllStudents() {
+        return studentRepository.count();
+    }
+
+    private void validateNotEmpty(List<?> list , String message) {
         if(list.isEmpty()) {
             throw new StudentNotFoundException(message);
         }
