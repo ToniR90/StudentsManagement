@@ -17,7 +17,9 @@ public class ParticipantService {
     private final ParticipantRepository participantRepository;
 
     public List<Participant> findAllParticipants() {
-        return participantRepository.findAll();
+        List<Participant> participants = participantRepository.findAll();
+        validateNotEmpty(participants , "There are no participants");
+        return participants;
     }
 
     public List<Participant> findByNameIgnoreCase(String name) {
@@ -39,14 +41,14 @@ public class ParticipantService {
 
     public List<Participant> findAllByRGPDStatus(String rgpdStatus) {
         RGPD_Status validStatus = RGPD_Status.fromLabel(rgpdStatus);
-        return participantRepository.findAllByRGPDStatus(validStatus);
+        List<Participant> participants = participantRepository.findAllByRGPDStatus(validStatus);
+        validateNotEmpty(participants , "There are no participants for this status");
+        return participants;
     }
 
     public List<Participant> findAllBySession(Long sessionId) {
         List<Participant> participants = participantRepository.findAllBySessionList_Id(sessionId);
-        if(participants.isEmpty()) {
-            throw new ParticipantNotFoundException("No participants found for this session");
-        }
+        validateNotEmpty(participants , "There are no participants for this session");
         return participants;
     }
 

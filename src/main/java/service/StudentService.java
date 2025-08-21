@@ -3,6 +3,7 @@ package service;
 import entity.participant.student.Student;
 import entity.participant.student.studentEnum.Degree;
 import entity.participant.student.studentEnum.StudyYear;
+import exception.personalException.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import repository.StudentRepository;
@@ -23,7 +24,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public List<Student> getAllByDegree(String degreeCode) {
+    public List<Student> findAllByDegree(String degreeCode) {
         Degree degree = Degree.fromCode(degreeCode);
         return studentRepository.findAllByDegree(degree);
     }
@@ -35,5 +36,11 @@ public class StudentService {
 
     public List<Student> findAllAlumni() {
         return studentRepository.findAllByIsAlumniTrue();
+    }
+
+    private void validateNoEmpty(List<?> list , String message) {
+        if(list.isEmpty()) {
+            throw new StudentNotFoundException(message);
+        }
     }
 }

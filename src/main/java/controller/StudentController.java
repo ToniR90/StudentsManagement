@@ -60,7 +60,7 @@ public class StudentController {
 
     @GetMapping("/by-degree")
     public ResponseEntity<List<StudentResponseDTO>> getByDegree(@RequestParam String code) {
-        List<Student> students = studentService.getAllByDegree(code);
+        List<Student> students = studentService.findAllByDegree(code);
         List<StudentResponseDTO> responseList = students
                 .stream()
                 .map(StudentMapper::toResponse)
