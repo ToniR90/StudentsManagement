@@ -15,22 +15,29 @@ public class ExternalCollaboratorService {
     private final ExternalCollaboratorRepository externalCollaboratorRepository;
 
     public List<ExternalCollaborator> findAllExternalCollaborator() {
-        return externalCollaboratorRepository.findAll();
-    }
-
-    public ExternalCollaborator findExternalCollaboratorById(Long id) {
-        return externalCollaboratorRepository.findById(id)
-                .orElseThrow(() -> new ExternalCollaboratorNotFoundException("External Collaborator not found"));
+        List<ExternalCollaborator> externalCollaborators = externalCollaboratorRepository.findAll();
+        validateNotEmpty(externalCollaborators , "There are no external collaborators");
+        return externalCollaborators;
     }
 
     public ExternalCollaborator saveExternalCollaborator(ExternalCollaborator externalCollaborator) {
         return externalCollaboratorRepository.save(externalCollaborator);
     }
 
-    public void deleteExternalCollaborator(Long id) {
-        if(!externalCollaboratorRepository.existsById(id)) {
-            throw new ExternalCollaboratorNotFoundException("External Collaborator not found");
+    public List<ExternalCollaborator> findByAffiliatedCompany(String affiliatedCompany) {
+        List<ExternalCollaborator> externalCollaborators = externalCollaboratorRepository
+                .findByAffiliatedCompanyIgnoreCase(affiliatedCompany);
+        validateNotEmpty(externalCollaborators , "There are no external collaborators for company " + affiliatedCompany);
+        return externalCollaborators;
+    }
+
+    public long countAllExternalCollaborators() {
+        return externalCollaboratorRepository.count();
+    }
+
+    private void validateNotEmpty(List<?> list , String message) {
+        if(list.isEmpty()) {
+            throw new ExternalCollaboratorNotFoundException(message);
         }
-        externalCollaboratorRepository.deleteById(id);
     }
 }
