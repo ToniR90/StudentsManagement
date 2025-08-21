@@ -1,5 +1,6 @@
 package entity.session.individualSession.individualSessionEnum;
 
+import exception.personalException.InvalidSessionAssistanceException;
 import exception.personalException.InvalidSessionTypeException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +14,12 @@ public enum SessionType {
     private final String label;
 
     public static SessionType fromLabel(String label) {
+        if(label == null || label.trim().isEmpty()) {
+            throw new InvalidSessionTypeException("null or empty");
+        }
+        String trimmedLabel = label.trim();
         for (SessionType status : values()) {
-            if( status.label.equalsIgnoreCase(label)) {
+            if( status.label.equalsIgnoreCase(trimmedLabel)) {
                 return status;
             }
         }
