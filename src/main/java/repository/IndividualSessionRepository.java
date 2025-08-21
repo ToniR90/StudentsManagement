@@ -1,5 +1,6 @@
 package repository;
 
+import entity.participant.student.Student;
 import entity.session.individualSession.IndividualSession;
 import entity.session.individualSession.individualSessionEnum.SessionAssistance;
 import entity.session.individualSession.individualSessionEnum.SessionType;
@@ -11,4 +12,5 @@ public interface IndividualSessionRepository extends JpaRepository<IndividualSes
 
     List<IndividualSession> findBySessionAssistance(SessionAssistance assistance);
     List<IndividualSession> findBySessionType(SessionType type);
+    List<IndividualSession> findByStudent(Student student);
 }
