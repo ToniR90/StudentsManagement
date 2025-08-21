@@ -15,7 +15,7 @@ public class StudentMapper {
                 .extraEmails(dto.getExtraEmails())
                 .degree(dto.getDegree())
                 .studyYear(dto.getStudyYear())
-                .isAlumni(dto.getIsAlumni())
+                .alumni(dto.getIsAlumni())
                 .alumniType(dto.getAlumniType())
                 .serviceAwareness(dto.getServiceAwarenessSelection().getServiceAwareness())
                 .firstContactDate(dto.getFirstContactDate())

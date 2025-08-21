@@ -14,8 +14,12 @@ public enum SessionAssistance {
     private final String label;
 
     public static SessionAssistance fromLabel(String label) {
+        if(label == null || label.trim().isEmpty()) {
+            throw new InvalidSessionAssistanceException("null or empty");
+        }
+        String trimmedLabel = label.trim();
         for (SessionAssistance status : values()) {
-            if( status.label.equalsIgnoreCase(label)) {
+            if( status.label.equalsIgnoreCase(trimmedLabel)) {
                 return status;
             }
         }
