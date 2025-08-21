@@ -16,22 +16,18 @@ public class ParticipantService {
     private final ParticipantRepository participantRepository;
 
     public List<Participant> findAllParticipants() {
-        return participantRepository.findAllParticipants();
+        return participantRepository.findAll();
     }
 
     public List<Participant> findByNameIgnoreCase(String name) {
         List<Participant> participants = participantRepository.findByNameIgnoreCase(name);
-        if(participants.isEmpty()) {
-            throw new ParticipantNotFoundException("Participant not found");
-        }
+        validateNotEmpty(participants, "Participant not found");
         return participants;
     }
 
     public List<Participant> findBySurnameIgnoreCase(String surname) {
         List<Participant> participants = participantRepository.findBySurnameIgnoreCase(surname);
-        if(participants.isEmpty()) {
-            throw new ParticipantNotFoundException("Participant not found");
-        }
+        validateNotEmpty(participants, "Participant not found");
         return participants;
     }
 
@@ -40,9 +36,8 @@ public class ParticipantService {
                 .orElseThrow(() -> new ParticipantNotFoundException("Participant not found"));
     }
 
-    public List<Participant> findByRGPDStatus(String rgpdStatus) {
+    public List<Participant> findAllByRGPDStatus(String rgpdStatus) {
         RGPD_Status validStatus = RGPD_Status.fromLabel(rgpdStatus);
-
         return participantRepository.findAllByRGPDStatus(validStatus);
     }
 
@@ -52,5 +47,11 @@ public class ParticipantService {
             throw new ParticipantNotFoundException("No participants found for this session");
         }
         return participants;
+    }
+
+    private void validateNotEmpty(List<?> list , String message) {
+        if(list.isEmpty()) {
+            throw new ParticipantNotFoundException(message);
+        }
     }
 }

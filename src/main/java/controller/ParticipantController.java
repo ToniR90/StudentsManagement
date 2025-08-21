@@ -59,7 +59,7 @@ public class ParticipantController {
 
     @GetMapping("/by-rgpd-status")
     public ResponseEntity<List<ParticipantResponseDTO>> getByRgpdStatus(@RequestParam String status) {
-        List<Participant> participants = participantService.findByRGPDStatus(status);
+        List<Participant> participants = participantService.findAllByRGPDStatus(status);
         List<ParticipantResponseDTO> responseList = participants
                 .stream()
                 .map(ParticipantMapper::toResponse)
