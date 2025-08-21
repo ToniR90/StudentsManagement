@@ -3,7 +3,6 @@ package service;
 import entity.participant.student.Student;
 import entity.participant.student.studentEnum.Degree;
 import entity.participant.student.studentEnum.StudyYear;
-import exception.personalException.StudentNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import repository.StudentRepository;
@@ -24,22 +23,13 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public void deleteStudent(Long id) {
-        if(!studentRepository.existsById(id)) {
-            throw new StudentNotFoundException("Student not found");
-        }
-        studentRepository.deleteById(id);
-    }
-
     public List<Student> getAllByDegree(String degreeCode) {
         Degree degree = Degree.fromCode(degreeCode);
-
         return studentRepository.findAllByDegree(degree);
     }
 
     public List<Student> findAllByStudyYear(String studyYear) {
         StudyYear validYear = StudyYear.fromLabel(studyYear);
-
         return studentRepository.findAllByStudyYear(validYear);
     }
 
