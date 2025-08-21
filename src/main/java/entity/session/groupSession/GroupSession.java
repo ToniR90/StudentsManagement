@@ -11,11 +11,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "group_session")
+@Table(name = "group_sessions")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,8 +40,8 @@ public class GroupSession extends Session {
     private Set<Participant> collaborators;
 
     @DecimalMin(value = "0.0" , message = "Assistance must be non-negative")
-    @Column(name = "assistance")
-    private double assistance;
+    @Column(name = "assistance", precision = 5, scale = 2)
+    private BigDecimal assistance = BigDecimal.ZERO;
 
     @Size(max = 100)
     @NotBlank
