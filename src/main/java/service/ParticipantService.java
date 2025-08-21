@@ -2,7 +2,6 @@ package service;
 
 import entity.participant.abstractParticipant.Participant;
 import entity.participant.abstractParticipant.participantEnum.RGPD_Status;
-import entity.session.abstractSession.Session;
 import exception.personalException.ParticipantNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class ParticipantService {
     }
 
     public List<Participant> findAllBySession(Long sessionId) {
-        List<Participant> participants = participantRepository.findAllBySession(sessionId);
+        List<Participant> participants = participantRepository.findAllBySessionList_Id(sessionId);
         if(participants.isEmpty()) {
             throw new ParticipantNotFoundException("No participants found for this session");
         }
