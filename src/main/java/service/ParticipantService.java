@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import repository.ParticipantRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -47,6 +48,16 @@ public class ParticipantService {
             throw new ParticipantNotFoundException("No participants found for this session");
         }
         return participants;
+    }
+
+    public void deleteByEmail(String email) {
+        Participant participant = participantRepository.findByEmailIgnoreCase(email)
+                        .orElseThrow(() -> new ParticipantNotFoundException("Participant not found"));
+        participantRepository.delete(participant);
+    }
+
+    public long countAllParticipants() {
+        return participantRepository.count();
     }
 
     private void validateNotEmpty(List<?> list , String message) {
