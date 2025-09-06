@@ -69,5 +69,9 @@ public class StudentController {
         return ResponseEntity.ok(responseList);
     }
 
-
+    @GetMapping("/count")
+    public ResponseEntity<Long> countAll() {
+        Long count = studentService.countAllStudents();
+        return ResponseEntity.ok(count);
+    }
 }

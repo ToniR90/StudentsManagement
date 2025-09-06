@@ -16,14 +16,14 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
     public List<Student> findAllStudents() {
         List<Student> students = studentRepository.findAll();
         validateNotEmpty(students , "There are no students");
         return students;
-    }
-
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
     }
 
     public List<Student> findAllByDegree(String degreeCode) {
