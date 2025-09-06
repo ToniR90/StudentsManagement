@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.university.management.repository.StudentRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,30 +26,38 @@ public class StudentService {
         return StudentMapper.toResponse(savedStudent);
     }
 
-    public List<Student> findAllStudents() {
+    public List<StudentResponseDTO> findAllStudents() {
         List<Student> students = studentRepository.findAll();
         validateNotEmpty(students , "There are no students");
-        return students;
+        return students.stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<Student> findAllByDegree(String degreeCode) {
+    public List<StudentResponseDTO> findAllByDegree(String degreeCode) {
         Degree degree = Degree.fromCode(degreeCode);
         List<Student> students = studentRepository.findAllByDegree(degree);
         validateNotEmpty(students , "There are no students for the degree " + degreeCode);
-        return students;
+        return students.stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<Student> findAllByStudyYear(String studyYear) {
+    public List<StudentResponseDTO> findAllByStudyYear(String studyYear) {
         StudyYear validYear = StudyYear.fromLabel(studyYear);
         List<Student> students = studentRepository.findAllByStudyYear(validYear);
         validateNotEmpty(students , "There are no students for the year " + studyYear);
-        return students;
+        return students.stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<Student> findAllAlumni() {
+    public List<StudentResponseDTO> findAllAlumni() {
         List<Student> students = studentRepository.findAllByIsAlumniTrue();
         validateNotEmpty(students , "There are no alumni students");
-        return students;
+        return students.stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public long countAllStudents() {
