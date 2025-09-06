@@ -1,12 +1,12 @@
 package controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dto.student.ServiceAwarenessSelection;
-import dto.student.StudentRequestDTO;
-import entity.participant.abstractParticipant.participantEnum.RGPD_Status;
-import entity.participant.student.studentEnum.Degree;
-import entity.participant.student.studentEnum.ServiceAwareness;
-import entity.participant.student.studentEnum.StudyYear;
+import com.university.management.dto.student.ServiceAwarenessSelection;
+import com.university.management.dto.student.StudentRequestDTO;
+import com.university.management.entity.participant.abstractParticipant.participantEnum.RGPD_Status;
+import com.university.management.entity.participant.student.studentEnum.Degree;
+import com.university.management.entity.participant.student.studentEnum.ServiceAwareness;
+import com.university.management.entity.participant.student.studentEnum.StudyYear;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
