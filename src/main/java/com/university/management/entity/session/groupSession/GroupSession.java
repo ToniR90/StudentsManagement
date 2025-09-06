@@ -29,6 +29,7 @@ public class GroupSession extends Session {
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
+    @OrderBy("surname ASC , name ASC")
     private Set<Participant> assistants;
 
     @ManyToMany
@@ -37,6 +38,7 @@ public class GroupSession extends Session {
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "participant_id")
     )
+    @OrderBy("surname ASC , name ASC")
     private Set<Participant> collaborators;
 
     @DecimalMin(value = "0.0" , message = "Assistance must be non-negative")
@@ -50,6 +52,8 @@ public class GroupSession extends Session {
 
     @ElementCollection
     @CollectionTable(name = "group_session_material" , joinColumns = @JoinColumn(name = "session_id"))
+    @OrderBy("value ASC")
+    @Size(max = 50 , message = "Maximum 50 materials allowed")
     private List<String> material;
 
     @Size(max = 100)
