@@ -9,7 +9,7 @@ import lombok.Getter;
 public enum SessionAssistance {
     YES("Yes") ,
     NO("No") ,
-    NO_ADVICE("No, but they have informed");
+    NO_ADVICE("No, but notified");
 
     private final String label;
 
