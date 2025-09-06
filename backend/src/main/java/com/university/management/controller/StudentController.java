@@ -29,41 +29,29 @@ public class StudentController {
 
     @GetMapping("/all")
     public ResponseEntity<List<StudentResponseDTO>> getAllStudents () {
-        List<Student> participants = studentService.findAllStudents();
-        List<StudentResponseDTO> responseList = participants
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
+        List<StudentResponseDTO> responseList = studentService
+                .findAllStudents();
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-degree")
     public ResponseEntity<List<StudentResponseDTO>> getByDegree(@RequestParam String code) {
-        List<Student> students = studentService.findAllByDegree(code);
-        List<StudentResponseDTO> responseList = students
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
+        List<StudentResponseDTO> responseList = studentService
+                .findAllByDegree(code);
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-study-year")
     public ResponseEntity<List<StudentResponseDTO>> getByStudyYear(@RequestParam String year) {
-        List<Student> students = studentService.findAllByStudyYear(year);
-        List<StudentResponseDTO> responseList = students
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
+        List<StudentResponseDTO> responseList = studentService
+                .findAllByStudyYear(year);
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/alumni")
     public ResponseEntity<List<StudentResponseDTO>> getAllAlumni() {
-        List<Student> students = studentService.findAllAlumni();
-        List<StudentResponseDTO> responseList = students
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
+        List<StudentResponseDTO> responseList = studentService
+                .findAllAlumni();
         return ResponseEntity.ok(responseList);
     }
 

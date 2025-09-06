@@ -3,6 +3,7 @@ package com.university.management.service;
 import com.university.management.dto.student.StudentRequestDTO;
 import com.university.management.dto.student.StudentResponseDTO;
 import com.university.management.entity.participant.student.Student;
+import com.university.management.entity.participant.student.studentEnum.AlumniType;
 import com.university.management.entity.participant.student.studentEnum.Degree;
 import com.university.management.entity.participant.student.studentEnum.StudyYear;
 import com.university.management.exception.personalException.StudentNotFoundException;
@@ -55,6 +56,15 @@ public class StudentService {
     public List<StudentResponseDTO> findAllAlumni() {
         List<Student> students = studentRepository.findAllByIsAlumniTrue();
         validateNotEmpty(students , "There are no alumni students");
+        return students.stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<StudentResponseDTO> findByAlumniType(String alumniType) {
+        AlumniType validAlumniType = AlumniType.fromLabel(alumniType);
+        List<Student> students = studentRepository.findByAlumniType(validAlumniType);
+        validateNotEmpty(students , "There are no alumni with type: " + alumniType);
         return students.stream()
                 .map(StudentMapper::toResponse)
                 .collect(Collectors.toList());
