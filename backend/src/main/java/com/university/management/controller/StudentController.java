@@ -55,6 +55,13 @@ public class StudentController {
         return ResponseEntity.ok(responseList);
     }
 
+    @GetMapping("/alumni-type")
+    public ResponseEntity<List<StudentResponseDTO>> getAlumniByType(@RequestParam String alumniType) {
+        List<StudentResponseDTO> responseList = studentService
+                .findByAlumniType(alumniType);
+        return ResponseEntity.ok(responseList);
+    }
+
     @GetMapping("/count")
     public ResponseEntity<Long> countAll() {
         Long count = studentService.countAllStudents();
