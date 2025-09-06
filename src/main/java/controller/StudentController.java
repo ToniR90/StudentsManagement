@@ -29,35 +29,6 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
-    /*@GetMapping("/by-name")
-    public ResponseEntity<List<StudentResponseDTO>> getByName(@RequestParam String name) {
-        List<Student> students = studentService.findByName(name);
-        List<StudentResponseDTO> responseList = students
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseList);
-    }*/
-
-    /*@GetMapping("/by-surname")
-    public ResponseEntity<List<StudentResponseDTO>> getBySurname(@RequestParam String surname) {
-        List<Student> students = studentService.findBySurname(surname);
-        List<StudentResponseDTO> responseList = students
-                .stream()
-                .map(StudentMapper::toResponse)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseList);
-    }*/
-
-    /*@GetMapping("/by-email")
-    public ResponseEntity<StudentResponseDTO> getByEmail(@RequestParam String email) {
-        Student student = studentService.findByEmail(email);
-        if(student == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(StudentMapper.toResponse(student));
-    }*/
-
     @GetMapping("/by-degree")
     public ResponseEntity<List<StudentResponseDTO>> getByDegree(@RequestParam String code) {
         List<Student> students = studentService.findAllByDegree(code);
