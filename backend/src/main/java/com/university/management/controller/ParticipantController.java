@@ -20,74 +20,58 @@ public class ParticipantController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ParticipantResponseDTO>> getAll() {
-        List<Participant> participants = participantService.findAllParticipants();
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findAllParticipants();
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-name")
     public ResponseEntity<List<ParticipantResponseDTO>> getByName(@RequestParam String name) {
-        List<Participant> participants = participantService.findByNameIgnoreCase(name.trim());
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findByNameIgnoreCase(name.trim());
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-surname")
     public ResponseEntity<List<ParticipantResponseDTO>> getBySurname(@RequestParam String surname) {
-        List<Participant> participants = participantService.findBySurnameIgnoreCase(surname.trim());
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findBySurnameIgnoreCase(surname.trim());
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-second-surname")
     public ResponseEntity<List<ParticipantResponseDTO>> getBySecondSurname(@RequestParam String secondSurname) {
-        List<Participant> participants = participantService.findBySecondSurnameIgnoreCase(secondSurname.trim());
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findBySecondSurnameIgnoreCase(secondSurname.trim());
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-email")
     public ResponseEntity<ParticipantResponseDTO> getByEmail(@RequestParam String email) {
-        Participant participant = participantService.findByEmailIgnoreCase(email);
-        return ResponseEntity.ok(ParticipantMapper.toResponse(participant));
+        ParticipantResponseDTO responseDTO = participantService
+                .findByEmailIgnoreCase(email);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping("/by-rgpd-status")
     public ResponseEntity<List<ParticipantResponseDTO>> getByRgpdStatus(@RequestParam String status) {
-        List<Participant> participants = participantService.findAllByRGPDStatus(status);
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findAllByRGPDStatus(status);
         return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/by-session")
     public ResponseEntity<List<ParticipantResponseDTO>> getBySession(@RequestParam Long sessionId) {
-        List<Participant> participants = participantService.findAllBySession(sessionId);
-        List<ParticipantResponseDTO> responseList = participants
-                .stream()
-                .map(ParticipantMapper::toResponse)
-                .collect(Collectors.toList());
+        List<ParticipantResponseDTO> responseList = participantService
+                .findAllBySession(sessionId);
         return ResponseEntity.ok(responseList);
     }
 
     @DeleteMapping("/by-email")
     public ResponseEntity<ParticipantResponseDTO> deleteByEmail(@RequestParam String email) {
-        Participant deletedParticipant = participantService.deleteByEmailIgnoreCase(email);
-        return ResponseEntity.ok(ParticipantMapper.toResponse(deletedParticipant));
+        ParticipantResponseDTO responseDTO = participantService
+                .deleteByEmailIgnoreCase(email);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping("/count")
