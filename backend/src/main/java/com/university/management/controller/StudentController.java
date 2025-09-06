@@ -29,6 +29,16 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<StudentResponseDTO>> getAllStudents () {
+        List<Student> participants = studentService.findAllStudents();
+        List<StudentResponseDTO> responseList = participants
+                .stream()
+                .map(StudentMapper::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseList);
+    }
+
     @GetMapping("/by-degree")
     public ResponseEntity<List<StudentResponseDTO>> getByDegree(@RequestParam String code) {
         List<Student> students = studentService.findAllByDegree(code);
@@ -58,4 +68,6 @@ public class StudentController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseList);
     }
+
+
 }
