@@ -2,17 +2,14 @@ package com.university.management.controller;
 
 import com.university.management.dto.student.StudentRequestDTO;
 import com.university.management.dto.student.StudentResponseDTO;
-import com.university.management.entity.participant.student.Student;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import com.university.management.mapper.StudentMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.university.management.service.StudentService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("students")

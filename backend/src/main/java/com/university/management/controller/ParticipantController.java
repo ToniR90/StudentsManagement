@@ -1,15 +1,12 @@
 package com.university.management.controller;
 
 import com.university.management.dto.participant.ParticipantResponseDTO;
-import com.university.management.entity.participant.abstractParticipant.Participant;
 import lombok.RequiredArgsConstructor;
-import com.university.management.mapper.ParticipantMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.university.management.service.ParticipantService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("participants")
