@@ -33,6 +33,12 @@ public class ParticipantService {
         return participants;
     }
 
+    public List<Participant> findBySecondSurnameIgnoreCase(String secondSurname) {
+        List<Participant> participants = participantRepository.findBySecondSurnameIgnoreCase(secondSurname);
+        validateNotEmpty(participants , "Participant not found");
+        return participants;
+    }
+
     public Participant findByEmailIgnoreCase(String email) {
         return participantRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new ParticipantNotFoundException("Participant not found"));

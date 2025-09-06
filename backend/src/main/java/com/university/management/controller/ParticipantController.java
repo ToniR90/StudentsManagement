@@ -48,6 +48,16 @@ public class ParticipantController {
         return ResponseEntity.ok(responseList);
     }
 
+    @GetMapping("/by-second-surname")
+    public ResponseEntity<List<ParticipantResponseDTO>> getBySecondSurname(@RequestParam String secondSurname) {
+        List<Participant> participants = participantService.findBySecondSurnameIgnoreCase(secondSurname.trim());
+        List<ParticipantResponseDTO> responseList = participants
+                .stream()
+                .map(ParticipantMapper::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responseList);
+    }
+
     @GetMapping("/by-email")
     public ResponseEntity<ParticipantResponseDTO> getByEmail(@RequestParam String email) {
         Participant participant = participantService.findByEmailIgnoreCase(email);

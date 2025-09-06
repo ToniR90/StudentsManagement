@@ -12,6 +12,7 @@ public interface ParticipantRepository extends JpaRepository<Participant , Long>
 
     List<Participant> findByNameIgnoreCase(String name);
     List<Participant> findBySurnameIgnoreCase(String surname);
+    List<Participant> findBySecondSurnameIgnoreCase(String secondSurname);
     Optional<Participant> findByEmailIgnoreCase(String email);
     List<Participant> findAllByRGPDStatus(RGPD_Status rgpdStatus);
     List<Participant> findAllBySessionList_Id(@Param("sessionId") Long sessionId);
