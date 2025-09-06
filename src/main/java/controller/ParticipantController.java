@@ -2,14 +2,10 @@ package controller;
 
 import dto.participant.ParticipantResponseDTO;
 import entity.participant.abstractParticipant.Participant;
-import entity.session.abstractSession.Session;
 import lombok.RequiredArgsConstructor;
 import mapper.ParticipantMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.ParticipantService;
 
 import java.util.List;
@@ -31,6 +27,7 @@ public class ParticipantController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseList);
     }
+
     @GetMapping("/by-name")
     public ResponseEntity<List<ParticipantResponseDTO>> getByName(@RequestParam String name) {
         List<Participant> participants = participantService.findByNameIgnoreCase(name.trim());
@@ -41,7 +38,7 @@ public class ParticipantController {
         return ResponseEntity.ok(responseList);
     }
 
-    @GetMapping("by-surname")
+    @GetMapping("/by-surname")
     public ResponseEntity<List<ParticipantResponseDTO>> getBySurname(@RequestParam String surname) {
         List<Participant> participants = participantService.findBySurnameIgnoreCase(surname.trim());
         List<ParticipantResponseDTO> responseList = participants
@@ -75,5 +72,17 @@ public class ParticipantController {
                 .map(ParticipantMapper::toResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseList);
+    }
+
+    @DeleteMapping("/by-email")
+    public ResponseEntity<ParticipantResponseDTO> deleteByEmail(@RequestParam String email) {
+        Participant deletedParticipant = participantService.deleteByEmailIgnoreCase(email);
+        return ResponseEntity.ok(ParticipantMapper.toResponse(deletedParticipant));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countAll() {
+        Long count = participantService.countAllParticipants();
+        return ResponseEntity.ok(count);
     }
 }
