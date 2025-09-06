@@ -6,6 +6,7 @@ import com.university.management.entity.participant.student.studentEnum.Degree;
 import com.university.management.entity.participant.student.studentEnum.ServiceAwareness;
 import com.university.management.entity.participant.student.studentEnum.StudyYear;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -55,4 +56,9 @@ public class Student extends Participant {
     @Size(max = 500 , message = "Maximum 500 characters allowed")
     @Column(name = "personal_observations")
     private String personalObservation;
+
+    @AssertTrue(message = "Alumni type can only be set when student is marked as alumni")
+    private boolean isAlumniTypeValid() {
+        return alumni || alumniType == null;
+    }
 }
