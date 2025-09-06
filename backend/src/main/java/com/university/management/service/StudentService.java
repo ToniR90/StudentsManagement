@@ -1,9 +1,12 @@
 package com.university.management.service;
 
+import com.university.management.dto.student.StudentRequestDTO;
+import com.university.management.dto.student.StudentResponseDTO;
 import com.university.management.entity.participant.student.Student;
 import com.university.management.entity.participant.student.studentEnum.Degree;
 import com.university.management.entity.participant.student.studentEnum.StudyYear;
 import com.university.management.exception.personalException.StudentNotFoundException;
+import com.university.management.mapper.StudentMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.university.management.repository.StudentRepository;
@@ -16,8 +19,10 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
+    public StudentResponseDTO saveStudent(StudentRequestDTO studentRequest) {
+        Student student = StudentMapper.toEntity(studentRequest);
+        Student savedStudent = studentRepository.save(student);
+        return StudentMapper.toResponse(savedStudent);
     }
 
     public List<Student> findAllStudents() {

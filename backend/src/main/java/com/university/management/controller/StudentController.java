@@ -23,10 +23,8 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<StudentResponseDTO> createStudent(@Valid @RequestBody StudentRequestDTO requestDTO) {
-        Student student = StudentMapper.toEntity(requestDTO);
-        Student savedStudent = studentService.saveStudent(student);
-        StudentResponseDTO responseDTO = StudentMapper.toResponse(savedStudent);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+        StudentResponseDTO studentResponse = studentService.saveStudent(requestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentResponse);
     }
 
     @GetMapping("/all")
