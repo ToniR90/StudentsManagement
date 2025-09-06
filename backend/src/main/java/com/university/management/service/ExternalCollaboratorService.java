@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.university.management.repository.ExternalCollaboratorRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,21 +24,21 @@ public class ExternalCollaboratorService {
         return ExternalCollaboratorMapper.toResponse(savedExternalCollaborator);
     }
 
-    public List<ExternalCollaborator> findAllExternalCollaborator() {
+    public List<ExternalCollaboratorResponseDTO> findAllExternalCollaborator() {
         List<ExternalCollaborator> externalCollaborators = externalCollaboratorRepository.findAll();
         validateNotEmpty(externalCollaborators , "There are no external collaborators");
-        return externalCollaborators;
+        return externalCollaborators.stream()
+                .map(ExternalCollaboratorMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public ExternalCollaborator saveExternalCollaborator(ExternalCollaborator externalCollaborator) {
-        return externalCollaboratorRepository.save(externalCollaborator);
-    }
-
-    public List<ExternalCollaborator> findByAffiliatedCompany(String affiliatedCompany) {
+    public List<ExternalCollaboratorResponseDTO> findByAffiliatedCompany(String affiliatedCompany) {
         List<ExternalCollaborator> externalCollaborators = externalCollaboratorRepository
                 .findByAffiliatedCompanyIgnoreCase(affiliatedCompany);
         validateNotEmpty(externalCollaborators , "There are no external collaborators for company " + affiliatedCompany);
-        return externalCollaborators;
+        return externalCollaborators.stream()
+                .map(ExternalCollaboratorMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public long countAllExternalCollaborators() {
