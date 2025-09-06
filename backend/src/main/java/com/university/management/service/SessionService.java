@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.university.management.repository.SessionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,10 +25,12 @@ public class SessionService {
         return SessionMapper.toResponse(session);
     }
 
-    public List<Session> findAllSessions() {
+    public List<SessionResponseDTO> findAllSessions() {
         List<Session> sessions = sessionRepository.findAll();
         validateNotEmpty(sessions , "There are no sessions");
-        return sessions;
+        return sessions.stream()
+                .map(SessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public long countAllSessions() {
