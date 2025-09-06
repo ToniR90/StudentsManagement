@@ -11,7 +11,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +27,7 @@ import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "participants")
+@EntityListeners(AuditingEntityListener.class)
 public abstract class Participant {
 
     @Id
@@ -59,6 +64,7 @@ public abstract class Participant {
     )
     @Column(name = "extra_email")
     @Size(max = 3 , message = "Maximum 3 extra emails allowed")
+    @OrderBy("extra_email ASC")
     private Set<@Email(message = "Invalid email format") String> extraEmails;
 
     @ManyToMany
@@ -68,4 +74,12 @@ public abstract class Participant {
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
     private List<Session> sessionList;
+
+    @CreatedDate
+    @Column(name = "created_date" , nullable = false , updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private LocalDateTime lastModifiedDate;
 }

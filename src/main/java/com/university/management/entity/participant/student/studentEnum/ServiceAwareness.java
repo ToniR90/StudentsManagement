@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ServiceAwareness {
-    GROUP_SESSION("Group individualSession: ") ,
+    GROUP_SESSION("Group Session: ") ,
     MAILING("Mailing: ") ,
     MOODLE("Moodle: ") ,
     COLLEAGUE("Colleague: ") ,
