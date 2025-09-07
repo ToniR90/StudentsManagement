@@ -13,11 +13,12 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class IndividualSessionService {
+public class IndividualSessionService {     //Afegir el mapeig aquí
 
     private final IndividualSessionRepository individualSessionRepository;
 
     public IndividualSession saveIndividualSession(IndividualSession individualSession) {
+
         return individualSessionRepository.save(individualSession);
     }
 
