@@ -19,5 +19,5 @@ public class IndividualSessionResponseDTO extends SessionResponseDTO {
     private String commitment;
     private Set<Participant> relatedPeople;
     private SessionAssistance assistance;
-    private SessionType sessionType;
+    private SessionType type;
 }

@@ -1,10 +1,13 @@
 package com.university.management.service;
 
+import com.university.management.dto.individualSession.IndividualSessionRequestDTO;
+import com.university.management.dto.individualSession.IndividualSessionResponseDTO;
 import com.university.management.entity.participant.student.Student;
 import com.university.management.entity.session.individualSession.IndividualSession;
 import com.university.management.entity.session.individualSession.individualSessionEnum.SessionAssistance;
 import com.university.management.entity.session.individualSession.individualSessionEnum.SessionType;
 import com.university.management.exception.personalException.IndividualSessionNotFoundException;
+import com.university.management.mapper.IndividualSessionMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.university.management.repository.IndividualSessionRepository;
@@ -17,8 +20,8 @@ public class IndividualSessionService {     //Afegir el mapeig aquí
 
     private final IndividualSessionRepository individualSessionRepository;
 
-    public IndividualSession saveIndividualSession(IndividualSession individualSession) {
-
+    public IndividualSessionResponseDTO saveIndividualSession(IndividualSessionRequestDTO individualSessionRequest) {
+        IndividualSession individualSession = IndividualSessionMapper.toEntity(individualSessionRequest);
         return individualSessionRepository.save(individualSession);
     }
 
