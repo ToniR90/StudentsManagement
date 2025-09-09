@@ -4,11 +4,13 @@ import com.university.management.dto.groupSession.GroupSessionRequestDTO;
 import com.university.management.dto.groupSession.GroupSessionResponseDTO;
 import com.university.management.entity.session.groupSession.GroupSession;
 import com.university.management.exception.personalException.GroupSessionNotFoundException;
+import com.university.management.mapper.GroupSessionMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.university.management.repository.GroupSessionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -17,36 +19,37 @@ public class GroupSessionService {
     private final GroupSessionRepository groupSessionRepository;
 
     public GroupSessionResponseDTO saveGroupSession(GroupSessionRequestDTO groupSessionRequest) {
-
-        return groupSessionRepository.save(groupSession);
+        GroupSession groupSession = GroupSessionMapper.toEntity(groupSessionRequest);
+        GroupSession savedGroupSession = groupSessionRepository.save(groupSession);
+        return GroupSessionMapper.toResponse(savedGroupSession);
     }
 
-    public void deleteGroupSession(Long id) {
-        GroupSession groupSession = groupSessionRepository.findById(id)
-                .orElseThrow(() -> new GroupSessionNotFoundException("There are no group sessions with id: " + id));
-        groupSessionRepository.delete(groupSession);
+    public List<GroupSessionResponseDTO> findByClassroom(String classroom) {
+        List<GroupSession> sessions = groupSessionRepository.findByClassroomIgnoreCase(classroom);
+        validateNotEmpty(sessions , "There are no sessions for the classroom: " + classroom);
+        return sessions.stream()
+                .map(GroupSessionMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<GroupSessionResponseDTO> findByClassTicket(String classTicket) {
+        List<GroupSession> sessions = groupSessionRepository.findByClassTicketIgnoreCase(classTicket);
+        validateNotEmpty(sessions , "There are no sessions for the class ticket: " + classTicket);
+        return sessions.stream()
+                .map(GroupSessionMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<GroupSessionResponseDTO> findAllGroupSessions() {
+        List<GroupSession> sessions = groupSessionRepository.findAll();
+        validateNotEmpty(sessions , "There are no group sessions");
+        return sessions.stream()
+                .map(GroupSessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public long countAllGroupSessions() {
         return groupSessionRepository.count();
-    }
-
-    public List<GroupSession> findByClassroom(String classroom) {
-        List<GroupSession> sessions = groupSessionRepository.findByClassroomIgnoreCase(classroom);
-        validateNotEmpty(sessions , "There are no sessions for the classroom: " + classroom);
-        return sessions;
-    }
-
-    public List<GroupSession> findByClassTicket(String classTicket) {
-        List<GroupSession> sessions = groupSessionRepository.findByClassTicketIgnoreCase(classTicket);
-        validateNotEmpty(sessions , "There are no sessions for the class ticket: " + classTicket);
-        return sessions;
-    }
-
-    public List<GroupSession> findAllGroupSessions() {
-        List<GroupSession> sessions = groupSessionRepository.findAll();
-        validateNotEmpty(sessions , "There are no group sessions");
-        return sessions;
     }
 
     public void validateNotEmpty(List<?> list , String message) {
