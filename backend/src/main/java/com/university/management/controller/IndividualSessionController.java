@@ -3,7 +3,6 @@ package com.university.management.controller;
 import com.university.management.dto.individualSession.IndividualSessionRequestDTO;
 import com.university.management.dto.individualSession.IndividualSessionResponseDTO;
 import com.university.management.entity.participant.student.Student;
-import com.university.management.entity.session.individualSession.IndividualSession;
 import com.university.management.entity.session.individualSession.individualSessionEnum.SessionAssistance;
 import com.university.management.entity.session.individualSession.individualSessionEnum.SessionType;
 import com.university.management.service.IndividualSessionService;
