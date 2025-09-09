@@ -1,5 +1,6 @@
 package com.university.management.service;
 
+import com.university.management.dto.groupSession.GroupSessionResponseDTO;
 import com.university.management.entity.session.groupSession.GroupSession;
 import com.university.management.exception.personalException.GroupSessionNotFoundException;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ public class GroupSessionService {
 
     private final GroupSessionRepository groupSessionRepository;
 
-    public GroupSession saveGroupSession(GroupSession groupSession) {
+    public GroupSessionResponseDTO saveGroupSession(GroupSession groupSession) {
         return groupSessionRepository.save(groupSession);
     }
 

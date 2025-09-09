@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class IndividualSessionService {     //Afegir el mapeig aquí
+public class IndividualSessionService {
 
     private final IndividualSessionRepository individualSessionRepository;
 
