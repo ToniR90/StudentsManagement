@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.university.management.repository.IndividualSessionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,37 +23,40 @@ public class IndividualSessionService {     //Afegir el mapeig aquí
 
     public IndividualSessionResponseDTO saveIndividualSession(IndividualSessionRequestDTO individualSessionRequest) {
         IndividualSession individualSession = IndividualSessionMapper.toEntity(individualSessionRequest);
-        return individualSessionRepository.save(individualSession);
+        IndividualSession savedIndividualSession = individualSessionRepository.save(individualSession);
+        return IndividualSessionMapper.toResponse(savedIndividualSession);
     }
 
-    public void deleteIndividualSession(Long id) {
-        IndividualSession individualSession = individualSessionRepository.findById(id)
-                .orElseThrow(() -> new IndividualSessionNotFoundException("There's no session with id: " + id));
-        individualSessionRepository.delete(individualSession);
-    }
-
-    public List<IndividualSession> findAllIndividualSessions() {
+    public List<IndividualSessionResponseDTO> findAllIndividualSessions() {
         List<IndividualSession> sessions = individualSessionRepository.findAll();
         validateNotEmpty(sessions , "There are no sessions");
-        return sessions;
+        return sessions.stream()
+                .map(IndividualSessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<IndividualSession> findByStudent(Student student) {
+    public List<IndividualSessionResponseDTO> findByStudent(Student student) {
         List<IndividualSession> sessions = individualSessionRepository.findByStudent(student);
         validateNotEmpty(sessions , "There are no sessions for the student " + student.getName());
-        return sessions;
+        return sessions.stream()
+                .map(IndividualSessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<IndividualSession> findBySessionAssistance(SessionAssistance assistance) {
+    public List<IndividualSessionResponseDTO> findBySessionAssistance(SessionAssistance assistance) {
         List<IndividualSession> sessions = individualSessionRepository.findBySessionAssistance(assistance);
         validateNotEmpty(sessions , "There are no sessions with assistance: " + assistance.getLabel());
-        return sessions;
+        return sessions.stream()
+                .map(IndividualSessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
-    public List<IndividualSession> findBySessionType(SessionType sessionType) {
+    public List<IndividualSessionResponseDTO> findBySessionType(SessionType sessionType) {
         List<IndividualSession> sessions = individualSessionRepository.findBySessionType(sessionType);
         validateNotEmpty(sessions , "There are no sessions for the type: " + sessionType.getLabel());
-        return sessions;
+        return sessions.stream()
+                .map(IndividualSessionMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     public Long countAllIndividualSessions() {
